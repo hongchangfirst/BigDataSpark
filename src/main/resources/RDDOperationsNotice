@@ -1,0 +1,2 @@
+1 If there's a flat operation, that means you need to return an iterator.
+2 If there's a pair operation, that means you need to return a Tuple2.
