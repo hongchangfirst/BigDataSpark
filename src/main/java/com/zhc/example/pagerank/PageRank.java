@@ -90,6 +90,7 @@ public class PageRank {
                         return destRanks.iterator();
                     }
             );
+
             ranks = contributions.reduceByKey((x, y) -> x + y).mapValues(d -> 0.15 + 0.85 * d);
         }
 
