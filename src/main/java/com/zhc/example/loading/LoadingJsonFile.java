@@ -74,6 +74,7 @@ public class LoadingJsonFile {
 
         // Since we need use twice, so we persist to avoid calculating linear graph again.
         // men.saveAsTextFile("output_person.json");
+        // why I use persist, the function is still called twice?
         men.persist(StorageLevel.MEMORY_AND_DISK());
 
         men.map(
@@ -84,6 +85,8 @@ public class LoadingJsonFile {
                     return s;
                 }
         ).repartition(2).saveAsTextFile("output_mapper.json");
+
+
 
     }
 

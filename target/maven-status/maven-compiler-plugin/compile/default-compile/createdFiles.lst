@@ -1,3 +1,6 @@
+com/zhc/example/pagerank/PageRank.class
+com/zhc/example/wordcount/WordCount.class
+com/zhc/example/accumulator/AccumulatorExample.class
 com/zhc/example/loading/LoadingJsonFile$Person.class
 com/zhc/example/loading/LoadingJsonFile.class
 com/zhc/demo/BigAnalysis.class

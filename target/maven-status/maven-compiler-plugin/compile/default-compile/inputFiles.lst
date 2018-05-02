@@ -2,3 +2,4 @@
 /Users/hczhang/workplace/BigDataSpark/src/main/java/com/zhc/example/wordcount/WordCount.java
 /Users/hczhang/workplace/BigDataSpark/src/main/java/com/zhc/example/loading/LoadingJsonFile.java
 /Users/hczhang/workplace/BigDataSpark/src/main/java/com/zhc/example/pagerank/PageRank.java
+/Users/hczhang/workplace/BigDataSpark/src/main/java/com/zhc/example/accumulator/AccumulatorExample.java

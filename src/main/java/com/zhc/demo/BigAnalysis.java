@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.zhc.example.accumulator.AccumulatorExample;
 import com.zhc.example.loading.LoadingJsonFile;
 import com.zhc.example.pagerank.PageRank;
 import com.zhc.example.wordcount.WordCount;
@@ -27,7 +28,8 @@ public class BigAnalysis {
 
         //WordCount.run(sc);
         //PageRank.run(sc);
-        LoadingJsonFile.run(sc);
+        //LoadingJsonFile.run(sc);
+        AccumulatorExample.run(sc);
     }
 
 
