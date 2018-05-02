@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.zhc.example.accumulator.AccumulatorExample;
+import com.zhc.example.broadcast.BroadcastExample;
 import com.zhc.example.loading.LoadingJsonFile;
 import com.zhc.example.pagerank.PageRank;
 import com.zhc.example.wordcount.WordCount;
@@ -26,10 +27,11 @@ public class BigAnalysis {
         SparkConf conf = new SparkConf().setMaster("local").setAppName("ZhcApp");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        //WordCount.run(sc);
-        //PageRank.run(sc);
-        //LoadingJsonFile.run(sc);
-        AccumulatorExample.run(sc);
+        //1. WordCount.run(sc);
+        //2. PageRank.run(sc);
+        //3. LoadingJsonFile.run(sc);
+        //4. AccumulatorExample.run(sc);
+        BroadcastExample.run(sc);
     }
 
 

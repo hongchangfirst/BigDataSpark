@@ -1,0 +1,21 @@
+1 A driver and its executors are together termed a Spark Application.
+The cluster contains master and workers, such as YARN, Mesos, or standalone.
+
+2 Driver has two duties:
+  2.a Converting a user program into tasks. The user program implicitly creates a
+  logical directed acyclic graph (GAG) of operations. Driver converts this logical
+  graph into a physical execution plan.
+
+  2.b Scheduling tasks on executors. Each executor represents a process capable of running
+  tasks and storing RDD data.
+
+3 Executors, are launched once at the beginning of a spark application and typically run for
+the entire lifetime of an application, though spark applications can continue if executors fail.
+  3.a Running tasks that make up the application and returning results to the driver.
+  3.b Providing in-memory storage for RDDs that are cached by user programs, through a service
+  called Block Manager that lives within each executor.
+
+4 Driver and Executors are logical concepts in Spark, how does spark run them? It depends on
+Cluster Manager. The cluster manager is pluggable component, can be YARN, Mesos, or built-in
+standalone cluster manager.
+
