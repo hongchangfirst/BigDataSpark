@@ -11,6 +11,7 @@ import com.zhc.example.broadcast.BroadcastExample;
 import com.zhc.example.loading.LoadingJsonFile;
 import com.zhc.example.pagerank.PageRank;
 import com.zhc.example.sql.SQLExample;
+import com.zhc.example.stream.StreamExample;
 import com.zhc.example.wordcount.WordCount;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -36,14 +37,15 @@ public class BigAnalysis {
                 // enable override output files
                 .set("spark.hadoop.validateOutputSpecs", "false");
 
-        JavaSparkContext sc = new JavaSparkContext(conf);
+        //JavaSparkContext sc = new JavaSparkContext(conf);
 
         //1. WordCount.run(sc);
         //2. PageRank.run(sc);
         //3. LoadingJsonFile.run(sc);
         //4. AccumulatorExample.run(sc);
         //5. BroadcastExample.run(sc);
-        SQLExample.run(sc);
+        //6. SQLExample.run(sc);
+        StreamExample.run();
     }
 
 
