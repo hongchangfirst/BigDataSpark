@@ -1,0 +1,76 @@
+Spark Standalone Cluster
+
+1 Launch Master:
+bin/spark-class org.apache.spark.deploy.master.Master
+
+You can find this if the master is successful.
+2018-05-03 13:54:43 INFO  MasterWebUI:54 - Bound MasterWebUI to 0.0.0.0, and started at http://172.24.43.31:8080
+2018-05-03 13:54:43 INFO  Master:54 - Starting Spark master at spark://172.24.43.31:7077
+
+2 Launch workers:
+First worker:
+bin/spark-class org.apache.spark.deploy.worker.Worker spark://172.24.43.31:7077
+
+You can find this if the worker is successful.
+2018-05-03 13:57:26 INFO  Utils:54 - Successfully started service 'sparkWorker' on port 50937.
+2018-05-03 13:57:26 INFO  Worker:54 - Successfully registered with master spark://172.24.43.31:7077
+
+
+Second worker:
+bin/spark-class org.apache.spark.deploy.worker.Worker spark://172.24.43.31:70772
+
+You can find this if the worker is successful.
+2018-05-03 14:00:25 INFO  Utils:54 - Successfully started service 'sparkWorker' on port 51401.
+2018-05-03 14:00:26 INFO  Worker:54 - Successfully registered with master spark://172.24.43.31:7077
+
+
+Clusters:
+1 one master.
+2 two workers.
+
+
+Spark Standalone Cluster Master UI:
+http://172.24.43.31:8080
+
+URL: spark://172.24.43.31:7077
+REST URL: spark://172.24.43.31:6066 (cluster mode)
+Alive Workers: 2
+Cores in use: 16 Total, 0 Used
+Memory in use: 30.0 GB Total, 0.0 B Used
+Applications: 0 Running, 0 Completed
+Drivers: 0 Running, 0 Completed
+Status: ALIVE
+
+Submit Job:
+./spark-submit --master spark://172.24.43.31:7077 --class com.zhc.demo.BigAnalysis ~/workplace/BigDataSpark/target/BigAnalysis-1.0-SNAPSHOT.jar
+./spark-submit --master spark://172.24.43.31:7077 --deploy-mode cluster --class com.zhc.demo.BigAnalysis ~/workplace/BigDataSpark/target/BigAnalysis-1.0-SNAPSHOT.jar
+./spark-submit --master spark://172.24.43.31:7077 --deploy-mode client --class com.zhc.demo.BigAnalysis ~/workplace/BigDataSpark/target/BigAnalysis-1.0-SNAPSHOT.jar
+./spark-submit --class com.zhc.demo.BigAnalysis --master spark://172.24.43.31:7077 ~/workplace/BigDataSpark/target/BigAnalysis-1.0-SNAPSHOT.jar
+
+These works(why port 6066 works instead of 7077):
+./spark-submit --master spark://172.24.43.31:6066 --deploy-mode cluster --class com.zhc.demo.BigAnalysis ~/workplace/BigDataSpark/target/BigAnalysis-1.0-SNAPSHOT.jar
+All applications submitted to 6066 occurs as driver in Master UI. Since 6066 uses cluster mode.
+All applications submitted to 7077 occurs as Application in Master UI. Since 7077 uses client mode.
+
+The output file is located in the work directory of the corresponding driver folder:
+/Users/hczhang/Downloads/spark-2.3.0-bin-hadoop2.7/work/driver-20180503144619-0006/
+
+
+"You must be running in cluster mode. The Spark Master accepts client mode submissions on port 7077 and cluster mode submissions on port 6066. This is because standalone cluster mode uses a REST API to submit applications by default. If you submit to port 6066 instead the warning should go away."
+
+
+
+Find the process receiving data on 6066
+sudo lsof -i tcp:6066
+sudo ps aux | grep 2265
+This process is: java -cp /Users/hczhang/Downloads/spark-2.3.0-bin-hadoop2.7/conf/:/Users/hczhang/Downloads/spark-2.3.0-bin-hadoop2.7/jars/* -Xmx1g org.apache.spark.deploy.master.Master
+
+
+sudo lsof -i tcp:7077
+It's still the above master process.
+
+sudo lsof -i tcp:8080 (Master UI)
+It's still the above master process.
+
+Spark shell with your standalone cluster(use 7077 URL instead of REST URL)
+./spark-shell --master spark://172.24.43.31:7077

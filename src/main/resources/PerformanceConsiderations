@@ -1,0 +1,20 @@
+1 Level of Parallelism
+First, if there is too little parallelism, spark might leave resources idle. While if there is too much parallelism,
+small overheads associated with each partition can add up and become significant.
+
+2 Serialization Format
+If large data needs to be transferred across network(shuffle operations), the performance of
+serialization/deserialization play a key part of the performance.
+
+3 Memory Management
+  3.a RDD Storage, for cache and persist. (60%)
+  3.b Shuffle and aggregation buffers. (20%)
+  3.c User code.  (20%)
+
+4 Garbage collection
+The cost of GC scales with the number of objects on the heap, not the number of bytes of data. So
+taking many objects and serializing them into a single giant buffer can reduce GC time.
+
+5 Hardware Provisioning
+Memory and CPU cores.
+

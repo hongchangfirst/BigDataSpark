@@ -24,7 +24,14 @@ import scala.Tuple2;
 public class BigAnalysis {
 
     public static void main(String[] args) {
-        SparkConf conf = new SparkConf().setMaster("local").setAppName("ZhcApp");
+        SparkConf conf = new SparkConf()
+                .setMaster("local")
+                .setAppName("ZhcApp")
+                //.set("spark.master", "spark://172.24.43.31:7077")
+                //.set("spark.ui.port", "8080")
+                // enable override output files
+                .set("spark.hadoop.validateOutputSpecs", "false");
+
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         //1. WordCount.run(sc);

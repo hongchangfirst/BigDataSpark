@@ -19,7 +19,7 @@ public class BroadcastExample {
      * @param sc
      */
     public static void run(JavaSparkContext sc) {
-        String inputFile = "broadcast_input_data";
+        String inputFile = "file:///Users/hczhang/Downloads/spark-2.3.0-bin-hadoop2.7/bin/broadcast_input_data";
         JavaRDD<String> callingCodes = sc.textFile(inputFile);
 
         Broadcast<Map<String, String>> callSignTable = sc.broadcast(getCallSignTable());

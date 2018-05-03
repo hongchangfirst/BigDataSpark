@@ -1,0 +1,11 @@
+1 User code defines a DAG (directed acyclic graph) of RDDs.
+
+2 Actions force translation of the DAG to an execution plan.
+Spark's scheduler submits a job to compute all needed RDDs. That job has one or more stages, which are parallel waves of computation
+composed of tasks. Each stage corresponds to one or more RDDs in the DAG. A single stage can correspond to multiple RDDs due to pipelining.
+Pipelining occurs when RDDs can be computed from their parents without data movement.
+
+3 Tasks are scheduled and executed on a cluster.
+
+4 The spark Web UI and the log files produced by the driver and executor processes.
+

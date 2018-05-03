@@ -54,15 +54,17 @@ public class AccumulatorExample {
         // How to solve such problem? One way is to use only one action in order to make sure the correctness.
         // The other way is to use cache or persist to not let spark calculate the transformations again.
         // cache use persist with default storage level.
-        // cache is another action, spark calculates the graph again.
+        // cache itself doesn't perform any action, It only marks the RDD to be cached. The next action afterwards
+        // it is going to be cached.
         fields.cache();
         //fields.persist(StorageLevel.MEMORY_AND_DISK());
 
-        // another action on cache.
+        // another action, spark calculates the graph and then cached the result.
         fields.count();
-        // output 12, not calculate again
+        // output 12, calculate again
         System.out.println("Accumulator blank lines after cache: " + blankLines.value());
 
+        // another action, spark doesn't need to calculate the graph again since it can use the cached result.
         fields.count();
         // output 12, not calculate again
         System.out.println("Accumulator blank lines again after cache: " + blankLines.value());
