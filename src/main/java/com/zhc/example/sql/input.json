@@ -1,0 +1,4 @@
+{"name":"zhang", "age":18, "sex": 1}
+{"name":"chang", "age":38, "sex": 0}
+{"nameNotExist":"NotExist", "age":38, "sex": 0}
+{"name":"hong", "age":18, "sex": 1}

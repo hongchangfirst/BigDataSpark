@@ -10,6 +10,7 @@ import com.zhc.example.accumulator.AccumulatorExample;
 import com.zhc.example.broadcast.BroadcastExample;
 import com.zhc.example.loading.LoadingJsonFile;
 import com.zhc.example.pagerank.PageRank;
+import com.zhc.example.sql.SQLExample;
 import com.zhc.example.wordcount.WordCount;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -19,6 +20,9 @@ import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.PairFunction;
+
+import org.apache.spark.sql.hive.HiveContext;
+
 import scala.Tuple2;
 
 public class BigAnalysis {
@@ -38,7 +42,8 @@ public class BigAnalysis {
         //2. PageRank.run(sc);
         //3. LoadingJsonFile.run(sc);
         //4. AccumulatorExample.run(sc);
-        BroadcastExample.run(sc);
+        //5. BroadcastExample.run(sc);
+        SQLExample.run(sc);
     }
 
 

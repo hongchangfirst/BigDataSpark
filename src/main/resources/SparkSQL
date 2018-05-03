@@ -1,0 +1,5 @@
+http://spark.apache.org/docs/latest/sql-programming-guide.html
+
+Dataset is a distributed collection of data.
+DataFrame is a Dataset organized into named columns.
+
