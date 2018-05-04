@@ -13,4 +13,10 @@
 
 7 Spark Streaming
 
+8 Parallelize
+
+9 Spark Windowed Streaming
+
+10 Spark Machine Learning - Spam Classifier
+
 
