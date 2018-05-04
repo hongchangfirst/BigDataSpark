@@ -1,0 +1,21 @@
+1 Spark Streaming receives data from various input sources and groups it into small batches.
+New batches are created at regular time intervals. At the beginning of each time interval a new
+batch is created, and any data that arrives during that interval gets added to that batch.
+
+2 Batch Interval is typically between 500 milliseconds and several seconds.
+
+3 Each input batch forms an RDD, and is processed using Spark jobs to create other RDD. Each RDD
+has one time slice of the data in the stream.
+
+4 DStreams also have new stateful transformations that can aggregate data across time.
+
+5 For each input source, Spark Streaming launches receivers, which are long running tasks running within the
+application's executors that collect data from the input source and save it as RDDs. These receive
+the input data and replicate it to another executor for fault tolerance (two replicas). This data is stored in the
+memory of the executors in the same way as cached RDDs. The Streaming Context in the driver program
+periodically runs Spark jobs to process this data and combine it with RDDs from previous time steps.
+
+6 Spark Streaming has checkpoint that saves state periodically to a reliable filesystem (HDFS or S3). Usually
+you might set up checkpoint every 5 - 10 seconds batches of data.
+
+7

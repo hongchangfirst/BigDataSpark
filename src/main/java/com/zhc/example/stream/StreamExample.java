@@ -24,6 +24,9 @@ public class StreamExample {
         JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(5));
         JavaReceiverInputDStream<String> lines = jssc.socketTextStream("localhost", 9998);
 
+        // Stateless transformations, though these functions look like they are applying to the
+        // whole stream, internally each DStream is composed of multiple RDDs (batches), and each
+        // stateless transformation applies separately to each RDD.
         JavaDStream<String> words = lines.flatMap(
                 s -> Arrays.asList(s.split(" ")).iterator()
         );
@@ -32,6 +35,7 @@ public class StreamExample {
                 s -> new Tuple2<>(s, 1)
         );
 
+        // For example, reduceByKey() reduces data within each time step instead of across time steps.
         JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey(
                 (i1, i2) -> i1 + i2
         );
