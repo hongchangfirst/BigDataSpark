@@ -1,0 +1,15 @@
+spark-submit --deploy-mode client or cluster
+
+1 client means driver program is going to be executed in the master node instead of worker node.
+2 cluster means driver program is going to be executed in one of the worker node.
+
+Generally, if the cluster's master and workers are in the same network, then you can use client mode.
+
+When to use cluster mode?
+1 If the cluster's master node is in a separate network of worker nodes. Then you have to use cluster mode.
+Since driver needs to transfer Jar package to Executors in worker node.
+2 If you want to make sure the driver can be reboot if failure happens, then you need to use cluster mode with
+--supervise flag.
+
+
+
