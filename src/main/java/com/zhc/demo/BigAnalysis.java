@@ -14,6 +14,7 @@ import com.zhc.example.sql.SQLExample;
 import com.zhc.example.stream.StreamExample;
 import com.zhc.example.wordcount.WordCount;
 import org.apache.spark.SparkConf;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -22,6 +23,7 @@ import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.PairFunction;
 
+import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.hive.HiveContext;
 
 import scala.Tuple2;
@@ -36,6 +38,14 @@ public class BigAnalysis {
                 //.set("spark.ui.port", "8080")
                 // enable override output files
                 .set("spark.hadoop.validateOutputSpecs", "false");
+
+        // SparkSession is the new entry point of Dataset and DataFrame, it composes of
+        // SparkContext, HiveContext, and SparkStreamingContext in future.
+        SparkSession sparkSession = SparkSession.builder()
+                .config(conf)
+                .getOrCreate();
+
+        JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
 
         //JavaSparkContext sc = new JavaSparkContext(conf);
 
