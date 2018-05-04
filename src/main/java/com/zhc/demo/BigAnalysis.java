@@ -1,7 +1,10 @@
 package com.zhc.demo;
 
+import com.zhc.example.machinelearning.SpamClassifier;
 import com.zhc.example.stream.WindowedStreamExample;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SparkSession;
 
 public class BigAnalysis {
 
@@ -17,12 +20,12 @@ public class BigAnalysis {
         // SparkSession is the new entry point of Dataset and DataFrame, it composes of
         // SparkContext, HiveContext, and SparkStreamingContext in future.
 
-        /*
+        //*
         SparkSession sparkSession = SparkSession.builder()
                 .config(conf)
                 .getOrCreate();
         JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
-        */
+        //*/
 
         //1. WordCount.run(sc);
         //2. PageRank.run(sc);
@@ -31,9 +34,9 @@ public class BigAnalysis {
         //5. BroadcastExample.run(sc);
         //6. SQLExample.run(sc);
         //7. StreamExample.run();
-        //8.ParallelizeExample.run(sc);
-        WindowedStreamExample.run();
-
+        //8. ParallelizeExample.run(sc);
+        //9. WindowedStreamExample.run();
+        SpamClassifier.run(sc);
     }
 
 
