@@ -1,6 +1,7 @@
 package com.zhc.demo;
 
 import com.zhc.example.machinelearning.SpamClassifier;
+import com.zhc.example.sql.SQLExample;
 import com.zhc.example.stream.WindowedStreamExample;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -12,6 +13,7 @@ public class BigAnalysis {
         SparkConf conf = new SparkConf()
                 .setMaster("local")
                 .setAppName("ZhcApp")
+                //.set("spark.driver.bindAddress", "192.168.1.150")
                 //.set("spark.master", "spark://172.24.43.31:7077")
                 //.set("spark.ui.port", "8080")
                 // enable override output files
@@ -24,7 +26,7 @@ public class BigAnalysis {
         SparkSession sparkSession = SparkSession.builder()
                 .config(conf)
                 .getOrCreate();
-        JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
+        //JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
         //*/
 
         //1. WordCount.run(sc);
@@ -32,11 +34,11 @@ public class BigAnalysis {
         //3. LoadingJsonFile.run(sc);
         //4. AccumulatorExample.run(sc);
         //5. BroadcastExample.run(sc);
-        //6. SQLExample.run(sc);
+        SQLExample.run(sparkSession);
         //7. StreamExample.run();
         //8. ParallelizeExample.run(sc);
         //9. WindowedStreamExample.run();
-        SpamClassifier.run(sc);
+        //10. SpamClassifier.run(sc);
     }
 
 

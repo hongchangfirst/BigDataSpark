@@ -1,20 +1,19 @@
 package com.zhc.example.sql;
 
-import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.SparkConf;
+import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Encoder;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.hive.HiveContext;
 
 public class SQLExample {
-    public static void run(JavaSparkContext sc) {
-
-        SparkSession sparkSession = SparkSession.builder()
-                .appName("ZhcSparkSql")
-                .getOrCreate();
-
+    /**
+     * Dataset
+     * @param sparkSession
+     */
+    public static void run(SparkSession sparkSession) {
         String inputFile = "input.json";
         Dataset<Row> ds = sparkSession.read().json(inputFile);
         //ds.show();
@@ -39,6 +38,7 @@ public class SQLExample {
         //parquet format
         //peopleDS.write().save("sql_output");
         //
+        // saveAsTable is in the spark-warehouse folder in local config(no hive), such as /spark-warehouse/sql_table_output
         peopleDS.write().saveAsTable("sql_table_output");
 
     }

@@ -1,0 +1,31 @@
+1 RDD, Resilient Distributed Data,
+  pros: compiled type safety, OO style.
+  cons: performance when serialization and deserialization of data and schema, object creation/destruction resulting GC.
+
+2 DataFrame,
+  schema for every row. serialization and deserialization of only data, excluding schema.
+
+3 Dataset, Encoder
+Dataset is a new interface in Spark1.6 provides the benefits of RDDs(Strong typing, ability to use powerful lambda functions)
+with the benefits of Spark SQL's optimized execution engine.
+
+DataFrame = Dataset[Row]
+Dataset<T> performance is better than RDD<T>, Dataset needs an explicit encoder for serialization/deserialization.
+RDD<T> depends on reflection which is slow.
+
+4 Transformation among RDD, Dataset, DataFrame
+DataFrame/Dataset -> RDD
+RDD = dataframe.rdd()
+RDD = dataset.rdd()
+
+
+RDD -> DataFrame
+Dataset<Row> dataset = sparkSession.createDataFrame(rdd, Person.class);
+
+RDD<T> -> DataSet<T>
+Dataset<Person> personDS = sparksession.createDataset(rdd, encoder);
+
+5 Difference between RDD and JavaRDD
+JavaRDD is for java language, which is the same as RDD in scala and python.
+But why sometimes we need to transform javardd to rdd in Java language itself? (Refer to SpamClassifer)
+rdd = javardd.rdd()

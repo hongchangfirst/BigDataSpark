@@ -32,6 +32,7 @@ public class AccumulatorExample {
                 }
         );
 
+
         String outputFile = "output_data_accumulator";
         // We can only get the right number of accumulator since the lazy mechanism of map transformation.
         // The incrementing of accumulator will happen only when the the saveAsTextFile action occurs.
