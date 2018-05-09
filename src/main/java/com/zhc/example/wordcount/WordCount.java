@@ -1,5 +1,6 @@
 package com.zhc.example.wordcount;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +21,8 @@ public class WordCount {
      * @param sc JavaSparkContext
      */
     public static void run(JavaSparkContext sc) {
-        String inputFile = "word_counts_input";
+        //String inputFile = "word_counts_input";
+        String inputFile = "s3://cnclc-test/word_counts_input";
         JavaRDD<String> input = sc.textFile(inputFile);
 
         /*
@@ -80,12 +82,17 @@ public class WordCount {
         );
 
         // See an example of 10 words.
+        // If you want to see the stdout in AWS EMR, you need to set the deploy mode as client mode.
         List<String> list = words.take(10);
         for (String s : list) {
             System.out.println(s);
         }
 
-        String outputFile = "word_counts_output";
-        counts.saveAsTextFile(outputFile);
+        new ArrayList<String>().clear();
+        //String outputFile = "word_counts_output";
+        String outputFile = "s3://cnclc-test/";
+        // if you have many cores running your application and you still want to get one file
+        // instead of part-00000 files, then you can repartition to 1 and then save to file.
+        counts.repartition(1).saveAsTextFile(outputFile);
     }
 }

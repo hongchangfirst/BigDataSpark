@@ -3,6 +3,7 @@ package com.zhc.demo;
 import com.zhc.example.machinelearning.SpamClassifier;
 import com.zhc.example.sql.SQLExample;
 import com.zhc.example.stream.WindowedStreamExample;
+import com.zhc.example.wordcount.WordCount;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
@@ -11,7 +12,7 @@ public class BigAnalysis {
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf()
-                .setMaster("local")
+                //.setMaster("local")
                 .setAppName("ZhcApp")
                 //.set("spark.driver.bindAddress", "192.168.1.150")
                 //.set("spark.master", "spark://172.24.43.31:7077")
@@ -26,15 +27,15 @@ public class BigAnalysis {
         SparkSession sparkSession = SparkSession.builder()
                 .config(conf)
                 .getOrCreate();
-        //JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
+        JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
         //*/
 
-        //1. WordCount.run(sc);
+        WordCount.run(sc);
         //2. PageRank.run(sc);
         //3. LoadingJsonFile.run(sc);
         //4. AccumulatorExample.run(sc);
         //5. BroadcastExample.run(sc);
-        SQLExample.run(sparkSession);
+        //SQLExample.run(sparkSession);
         //7. StreamExample.run();
         //8. ParallelizeExample.run(sc);
         //9. WindowedStreamExample.run();
