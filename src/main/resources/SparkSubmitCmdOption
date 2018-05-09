@@ -1,0 +1,28 @@
+spark-submit --deploy-mode client
+     --class com.zhc.personalization.neighbourhood.CLI
+     --num-executors 25
+     --executor-cores 7
+     --executor-memory 10G
+     --conf spark.default.parallelism=70
+     --jars s3://zhc/ZhcIds-2.0.jar
+     s3://zhc/20180318/RecommendationBasedOnUserCF-1.0.jar
+
+--num-executors
+How many executor processes. Default is 2 for YARN cluster.
+
+--executor-cores
+How many CPU cores an executor process has. Each CPU core can execute a task thread at a time.
+
+--executor-memory
+How much memory an executor has. Generally it's 4G-8G.
+--conf spark.default.parallelism=70
+
+spark.default.parallelism
+How many tasks that each stage can have. We suggest it's about (num-executors * executor-cores) * (2-3)
+For example, if we have 25 executors, 4 cores for each executor, then we have 100 cores in total. But
+if we set parallelism only to 1, that means most cores don't have tasks to do. So this is a bad value.
+
+--driver-memory
+How much memory the driver program has. One important thing to notice is that if you use collect in driver
+program, you need to make sure the driver memory is enough to collect all the data, or else OOM Exception.
+
