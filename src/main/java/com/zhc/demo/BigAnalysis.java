@@ -11,6 +11,11 @@ import org.apache.spark.sql.SparkSession;
 public class BigAnalysis {
 
     public static void main(String[] args) {
+
+
+    }
+
+    private static void runSpark() {
         SparkConf conf = new SparkConf()
                 //.setMaster("local")
                 .setAppName("ZhcApp")
@@ -41,6 +46,4 @@ public class BigAnalysis {
         //9. WindowedStreamExample.run();
         //10. SpamClassifier.run(sc);
     }
-
-
 }

@@ -13,3 +13,15 @@ Since driver needs to transfer Jar package to Executors in worker node.
 
 
 
+
+###For YARN cluster, --master yarn
+You need to have environment variable HADOOP_CONF_DIR or YARN_CONFI_DIR to point the directory which contains
+the client side configuration files for the Hadoop cluster.
+./bin/spark-submit --class path.to.your.Class --master yarn --deploy-mode cluster [options] <app jar> [app options]
+
+1 client mode means the driver runs in the client process, and the application master is only used for requesting
+resources from YARN.
+2 cluster mode means the driver runs inside an application master process which is managed by YARN on the cluster,
+and the client can go away after initiating the application.
+
+Which understanding is right?
